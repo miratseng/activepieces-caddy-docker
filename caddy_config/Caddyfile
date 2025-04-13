@@ -1,5 +1,5 @@
 activepieces.aigentic.audio {
-    reverse_proxy activepieces:8080 {
+    reverse_proxy activepieces:80 {
       # `activepieces` in this setting tells Caddy to use the service def defined in the docker-compose.yml file
       flush_interval -1
     }
