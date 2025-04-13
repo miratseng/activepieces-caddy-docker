@@ -2,28 +2,25 @@ version: '3.0'
 
 services:
 
-  # caddy:
-  #   image: caddy:latest
-  #   restart: unless-stopped
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - caddy_data:/data
-  #     - ${DATA_FOLDER}/caddy_config:/config
-  #     - ${DATA_FOLDER}/caddy_config/Caddyfile:/etc/caddy/Caddyfile
-  #   networks:
-  #     - activepieces
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - ${DATA_FOLDER}/caddy_config:/config
+      - ${DATA_FOLDER}/caddy_config/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - activepieces
 
   activepieces:
     image: ghcr.io/activepieces/activepieces
     container_name: activepieces
     restart: unless-stopped
-    ## Enable the following line if you already use AP_EXECUTION_MODE with SANDBOXED or old activepieces, checking the breaking change documentation for more info.
-    ## privileged: true
     ports:
-      - '8080:80'
-      # - '4200:4200'
+      - '8080:80'  # host:container
     depends_on:
       - postgres
       - redis
